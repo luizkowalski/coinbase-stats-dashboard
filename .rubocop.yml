@@ -1,0 +1,22 @@
+Rails:
+  Enabled: true
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - db/schema.rb

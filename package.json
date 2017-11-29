@@ -1,0 +1,8 @@
+{
+  "name": "coinbase-digest",
+  "private": true,
+  "dependencies": {
+    "@fnando/sparkline": "^0.3.4",
+    "bootstrap": "^3.3.7"
+  }
+}

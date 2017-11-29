@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= Integer(ENV.fetch("RAILS_MAX_THREADS") { 5 }) * 2 %>
+
+development:
+  <<: *default
+  database: coinbase_stats_dev
+
+test:
+  <<: *default
+  database: coinbase_stats_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

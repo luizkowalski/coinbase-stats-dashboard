@@ -1,0 +1,67 @@
+<div class="p-big-header-stas row-no-padding">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1 class="profits"><strong>Profits</strong></h1>
+      <h3 class="total_balance"> <%= number_to_currency(@stats[:balance], locale: 'de') %> </h3>
+      <div class="profits-details">
+        <h2>
+          <span class="label <%= label_css_class(@stats[:profit]) %>">
+            <%= number_to_currency(@stats[:profit], locale: 'de') %> (<%= @stats[:profit_percentage] %>%)
+          </span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row wallets">
+  <div class="col-md-4 col-md-offset-1">
+    <span class="label label-info">Profit flotation</span>
+    <div class="graph">
+      <svg class="profit_graph" width="400" height="50" stroke-width="3"></svg>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-offset-1">
+    <span class="label label-info">Wallet breakdown</span>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Wallet</th>
+          <th>Current balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bitcoin">
+          <th><span class="glyphicon glyphicon-bitcoin" </span></th>
+          <th>
+            <%= number_to_currency(@stats[:btc_balance], locale: 'de') %>
+          </th>
+        </tr>
+        <tr class="">
+          <th>ETH</th>
+          <th>
+            <%= number_to_currency(@stats[:eth_balance], locale: 'de') %>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="investiment-stats">
+      Invested:
+      <%= number_to_currency(@stats[:deposits]) %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  data = <%= @graph %>
+  sparkline.sparkline(document.querySelector(".profit_graph"), data, {
+    interactive: true
+  });
+</script>

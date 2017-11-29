@@ -1,0 +1,55 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.label-big{
+  font-size: 150%;
+}
+
+.row-no-padding {
+  margin-left: -15px;
+  margin-right: -15px;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.total_balance {
+  color: white;
+  text-align: center;
+  font-size: 35px;
+}
+
+.p-big-header-stas {
+  background-color: #32acf2;
+  padding: 8rem;
+}
+
+.wallets {
+  margin-top: 10px
+}
+
+.wallet-breakdown {
+  margin-top: 4px;
+}
+
+.profits {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 7rem;
+  text-align: center;
+  color: white;
+}
+
+.profits-details{
+  text-align: center;
+}
+
+.investiment-stats {
+  color: #2a448e;
+}
+
+.profit_graph{
+  stroke: #0008ff;
+  fill: rgba(137, 150, 220, 0.24);
+}
