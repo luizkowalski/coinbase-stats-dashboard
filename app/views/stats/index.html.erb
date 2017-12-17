@@ -7,6 +7,7 @@
         <h2>
           <span class="label <%= label_css_class(@stats[:profit]) %>">
             <%= number_to_currency(@stats[:profit], locale: 'de') %> (<%= @stats[:profit_percentage] %>%)
+            <small class="deposit-notice">Over<%= number_to_currency(@stats[:deposits]) %> deposits</small>
           </span>
         </h2>
       </div>
@@ -29,6 +30,8 @@
         <tr>
           <th>Wallet</th>
           <th>Current balance</th>
+          <th>Invested</th>
+          <th>Profit</th>
         </tr>
       </thead>
       <tbody>
@@ -37,19 +40,27 @@
           <th>
             <%= number_to_currency(@stats[:btc_balance], locale: 'de') %>
           </th>
+          <th><%= number_to_currency(@stats[:bought_btc], locale: 'de') %></th>
+          <th><%= number_to_currency(@stats[:btc_balance] - @stats[:bought_btc], locale: 'de') %></th>
         </tr>
         <tr class="">
           <th>ETH</th>
           <th>
             <%= number_to_currency(@stats[:eth_balance], locale: 'de') %>
           </th>
+          <th><%= number_to_currency(@stats[:bought_eth], locale: 'de') %></th>
+          <th><%= number_to_currency(@stats[:eth_balance] - @stats[:bought_eth], locale: 'de') %></th>
+        </tr>
+        <tr>
+          <th>LTC</th>
+          <th>
+            <%= number_to_currency(0, locale: 'de') %>
+          </th>
+          <th><%= number_to_currency(0, locale: 'de') %></th>
+          <th><%= number_to_currency(0, locale: 'de') %></th>
         </tr>
       </tbody>
     </table>
-    <div class="investiment-stats">
-      Invested:
-      <%= number_to_currency(@stats[:deposits]) %>
-    </div>
   </div>
 </div>
 

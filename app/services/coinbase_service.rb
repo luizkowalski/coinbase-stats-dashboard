@@ -13,10 +13,12 @@ class CoinbaseService
     {
       deposits: total_deposited,
       btc_balance: btc_balance,
+      bought_btc: deposited_wallet(btc_account),
+      bought_eth: deposited_wallet(eth_account),
       eth_balance: eth_balance,
       balance: total_balance,
       profit: profit.round(3),
-      profit_percentage: profit_percentage.round(3)
+      profit_percentage: profit_percentage.round(2)
     }
   end
 
@@ -26,7 +28,7 @@ class CoinbaseService
     total = 0
     client.transactions(eur_account.id) do |data, _resp|
       deposits = data.reject { |t| t.type == 'buy' }
-      total += deposits.map { |deposit| deposit.amount['amount'] }.map(&:to_f).inject(:+)
+      total += deposits.map { |deposit| deposit.native_amount['amount'] }.map(&:to_f).inject(:+)
     end
 
     total
@@ -34,6 +36,15 @@ class CoinbaseService
 
   def profit
     @profit ||= total_balance - total_deposited
+  end
+
+  def deposited_wallet(wallet)
+    total = 0
+    wallet.transactions do |data, _resp|
+      deposits = data.select { |t| t.type == 'buy' }
+      total += deposits.map { |deposit| deposit.native_amount['amount'] }.map(&:to_f).inject(:+)
+    end
+    total
   end
 
   def profit_percentage
