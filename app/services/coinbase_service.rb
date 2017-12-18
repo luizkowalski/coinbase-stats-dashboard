@@ -22,6 +22,11 @@ class CoinbaseService
     }
   end
 
+  def sell(amount, coin)
+    wl = send("#{coin}_account")
+    wl.sell(amount: amount.to_f.round(2), currency: 'EUR')
+  end
+
   private
 
   def total_deposited

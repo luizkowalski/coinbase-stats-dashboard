@@ -1,0 +1,11 @@
+<div class="hero">
+  <div class="login-form">
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <%= form_for(:session, url: { action: "create" })  do |f| %>
+          <%= f.password_field :password, class: 'form-control' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,6 +32,7 @@
           <th>Current balance</th>
           <th>Invested</th>
           <th>Profit</th>
+          <th>Cashout</th>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +43,9 @@
           </th>
           <th><%= number_to_currency(@stats[:bought_btc], locale: 'de') %></th>
           <th><%= number_to_currency(@stats[:btc_balance] - @stats[:bought_btc], locale: 'de') %></th>
+          <th>
+            <%= button_to('cashout', { action: "cashout", coin: 'btc', amount: @stats[:btc_balance] - @stats[:bought_btc] }, class: 'btn btn-default btn-small',method: :post, remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' })%>
+          </th>
         </tr>
         <tr class="">
           <th>ETH</th>
@@ -50,6 +54,9 @@
           </th>
           <th><%= number_to_currency(@stats[:bought_eth], locale: 'de') %></th>
           <th><%= number_to_currency(@stats[:eth_balance] - @stats[:bought_eth], locale: 'de') %></th>
+          <th>
+            <%= button_to('cashout', { action: "cashout", coin: 'eth', amount: @stats[:eth_balance] - @stats[:bought_eth] }, class: 'btn btn-default btn-small',method: :post, remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' })%>
+          </th>
         </tr>
         <tr>
           <th>LTC</th>
@@ -58,6 +65,9 @@
           </th>
           <th><%= number_to_currency(0, locale: 'de') %></th>
           <th><%= number_to_currency(0, locale: 'de') %></th>
+          <th>
+            <%= button_to('cashout', { action: "cashout", coin: 'ltc' }, class: 'btn btn-default btn-small',method: :post, remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' })%>
+          </th>
         </tr>
       </tbody>
     </table>
