@@ -13,9 +13,11 @@ class CoinbaseService
     {
       deposits: total_deposited,
       btc_balance: btc_balance,
+      eth_balance: eth_balance,
+      ltc_balance: ltc_balance,
       bought_btc: deposited_wallet(btc_account),
       bought_eth: deposited_wallet(eth_account),
-      eth_balance: eth_balance,
+      bought_ltc: deposited_wallet(ltc_account),
       balance: total_balance,
       profit: profit.round(3),
       profit_percentage: profit_percentage.round(2)
@@ -32,7 +34,7 @@ class CoinbaseService
   def total_deposited
     total = 0
     client.transactions(eur_account.id) do |data, _resp|
-      deposits = data.reject { |t| t.type == 'buy' }
+      deposits = data.select { |t| t.type == 'fiat_deposit' }
       total += deposits.map { |deposit| deposit.native_amount['amount'] }.map(&:to_f).inject(:+)
     end
 
@@ -45,6 +47,7 @@ class CoinbaseService
 
   def deposited_wallet(wallet)
     total = 0
+    return total if wallet.transactions.empty?
     wallet.transactions do |data, _resp|
       deposits = data.select { |t| t.type == 'buy' }
       total += deposits.map { |deposit| deposit.native_amount['amount'] }.map(&:to_f).inject(:+)
@@ -57,7 +60,7 @@ class CoinbaseService
   end
 
   def total_balance
-    @total_balance ||= btc_balance + eth_balance
+    @total_balance ||= btc_balance + eth_balance + eur_balance + ltc_balance
   end
 
   def btc_balance
@@ -66,6 +69,14 @@ class CoinbaseService
 
   def eth_balance
     @eth ||= balance(eth_account)
+  end
+
+  def ltc_balance
+    @ltc ||= balance(ltc_account)
+  end
+
+  def eur_balance
+    @eur ||= balance(eur_account)
   end
 
   def balance(account)
@@ -78,6 +89,10 @@ class CoinbaseService
 
   def eth_account
     wallet('ETH Wallet')
+  end
+
+  def ltc_account
+    wallet('LTC Wallet')
   end
 
   def eur_account

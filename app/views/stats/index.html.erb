@@ -16,14 +16,14 @@
 </div>
 
 <div class="row wallets">
-  <div class="col-md-4 col-md-offset-1">
+  <div class="col-md-3 col-md-offset-1">
     <span class="label label-info">Profit flotation</span>
     <div class="graph">
       <svg class="profit_graph" width="400" height="50" stroke-width="3"></svg>
     </div>
   </div>
 
-  <div class="col-md-4 col-sm-offset-1">
+  <div class="col-md-5 col-sm-offset-1">
     <span class="label label-info">Wallet breakdown</span>
     <table class="table table-striped">
       <thead>
@@ -61,10 +61,10 @@
         <tr>
           <th>LTC</th>
           <th>
-            <%= number_to_currency(0, locale: 'de') %>
+            <%= number_to_currency(@stats[:ltc_balance], locale: 'de') %>
           </th>
-          <th><%= number_to_currency(0, locale: 'de') %></th>
-          <th><%= number_to_currency(0, locale: 'de') %></th>
+          <th><%= number_to_currency(@stats[:bought_ltc], locale: 'de') %></th>
+          <th><%= number_to_currency(@stats[:ltc_balance] - @stats[:bought_ltc], locale: 'de') %></th>
           <th>
             <%= button_to('cashout', { action: "cashout", coin: 'ltc' }, class: 'btn btn-default btn-small',method: :post, remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' })%>
           </th>
